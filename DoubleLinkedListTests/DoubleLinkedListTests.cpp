@@ -76,7 +76,9 @@ namespace DoubleLinkedListTests
 
 		TEST_METHOD(popFront)
 		{
-			List<int> list;
+			List<int> list = { 10,20,30,40,50 };
+			Assert::AreEqual(list.first(), 10);
+			Assert::AreEqual(list.popFront(), 10);
 		}
 
 		TEST_METHOD(popBack)
