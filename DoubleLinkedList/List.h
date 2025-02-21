@@ -16,12 +16,12 @@ public:
 	T popFront();
 	T popBack();
 	bool insert(const T& value, int index);
-	bool remove(const T& value);
+	int remove(const T& value);
 	T first() const;
 	T last() const;
 	Iterator<T> begin();
 	Iterator<T> end();
-	void destory();
+	void destroy();
 	int getLength() const;
 
 private:
@@ -50,7 +50,7 @@ inline List<T>::List(std::initializer_list<T> list) : m_length(0), m_head(nullpt
 template<typename T>
 inline List<T>::~List()
 {
-	destory();
+	destroy();
 	delete m_head;
 	m_head = nullptr;
 	delete m_tail;
@@ -180,44 +180,52 @@ inline bool List<T>::insert(const T& value, int index)
 }
 
 template<typename T>
-inline bool List<T>::remove(const T& value)
+inline int List<T>::remove(const T& value)
 {
 	if (!m_tail)
-		return false;
+		return 0;
 
-	if (m_head->value == value)
-	{
-		popFront();
-		return true;
-	}
-
-	if (!m_head->next)
-		return false;
-
-	if (m_tail->value == value)
-	{
-		popBack();
-		return true;
-	}
-
-	if (m_length <= 2)
-		return false;
-
-	Node<T>* node = m_head->next;
-	while (node != m_tail->previous)
+	int count = 0;
+	
+	Node<T>* node = m_head;
+	while (node && m_tail && node != m_tail->next)
 	{
 		if (node->value == value)
 		{
-			node->previous->next = node->next;
-			node->next->previous = node->previous;
-			m_length--;
-			delete node;
-			node = nullptr;
-			return true;
+			if (node != m_head)
+			{
+				node->previous->next = node->next;
+			}
+			else
+			{
+				popFront();
+				node = m_head;
+				count++;
+				continue;
+			}
+
+			if (node != m_tail)
+			{
+				node->next->previous = node->previous;
+				Node<T>* temp = node;
+				node = node->next;
+				delete temp;
+				m_length--;
+				count++;
+			}
+			else
+			{
+				popBack();
+				node = m_tail;
+				count++;
+			}
 		}
-		node = node->next;
+		else
+		{
+			node = node->next;
+		}
 	}
-	return false;
+	return count;
 }
 
 template<typename T>
@@ -253,7 +261,7 @@ inline Iterator<T> List<T>::end()
 }
 
 template<typename T>
-inline void List<T>::destory()
+inline void List<T>::destroy()
 {
 	if (!m_tail)
 		return;

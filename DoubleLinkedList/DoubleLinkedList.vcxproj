@@ -133,11 +133,15 @@
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="ObjectPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DoubleLinkedListTests\DoubleLinkedListTests.vcxproj">
       <Project>{2351afd4-4618-4730-b6e9-4821bd09eacc}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documentation.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
