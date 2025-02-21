@@ -1,4 +1,5 @@
 Double Linked List
+
 This is a library designed to give the use of three main classes. The classes in question are node, iterator, and list. They all are very flexible and can be used in various scenerios. 
 
 - Node: Is a fundamental building block of linked lists. Its most common use as a data or pointer is dependent on what the user needs done. If you need to store a value, then use a data (or more accurately, use the m_current as used in code). If you want to move to the next node, then use the pointer (also know as m_next), or you can even go to the previous node (using m_previous).
