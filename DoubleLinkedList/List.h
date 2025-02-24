@@ -17,10 +17,11 @@ public:
 	T popBack();
 	bool insert(const T& value, int index);
 	int remove(const T& value);
+	Iterator<T> find(const T& value);
 	T first() const;
 	T last() const;
-	Iterator<T> begin();
-	Iterator<T> end();
+	Iterator<T> begin() const;
+	Iterator<T> end() const;
 	void destroy();
 	int getLength() const;
 
@@ -229,6 +230,17 @@ inline int List<T>::remove(const T& value)
 }
 
 template<typename T>
+inline Iterator<T> List<T>::find(const T& value)
+{
+	for (Iterator<T> iter = begin(); iter != end(); iter++)
+	{
+		if (*iter == value)
+			return iter;
+	}
+	return Iterator<T>();
+}
+
+template<typename T>
 inline T List<T>::first() const
 {
 	if (!m_head)
@@ -245,7 +257,7 @@ inline T List<T>::last() const
 }
 
 template<typename T>
-inline Iterator<T> List<T>::begin()
+inline Iterator<T> List<T>::begin() const
 {
 	if (!m_head)
 		return Iterator<T>();
@@ -253,11 +265,11 @@ inline Iterator<T> List<T>::begin()
 }
 
 template<typename T>
-inline Iterator<T> List<T>::end()
+inline Iterator<T> List<T>::end() const
 {
 	if (!m_tail)
 		return Iterator<T>();
-	return Iterator<T>(m_tail);
+	return Iterator<T>(m_tail->next);
 }
 
 template<typename T>

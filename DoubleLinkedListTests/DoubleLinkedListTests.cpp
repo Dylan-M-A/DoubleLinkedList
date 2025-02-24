@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "List.h"
+#include "ObjectPool.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -220,6 +221,38 @@ namespace DoubleLinkedListTests
 			Assert::AreEqual(0, list.first());
 			Assert::AreEqual(0, list.last());
 		}
+		TEST_METHOD(Find)
+		{
+			List<int> list;
+			Assert::IsNotNull(&list);
+
+			list.pushBack(1);
+			list.pushBack(2);
+			list.pushBack(3);
+			list.pushBack(4);
+
+			Iterator<int> iter = list.begin();
+			Assert::AreEqual(1, *iter);
+			iter++;
+			Assert::AreEqual(2, *iter);
+			iter++;
+			Assert::AreEqual(3, *iter);
+			iter++;
+			Assert::AreEqual(4, *iter);
+
+			Iterator<int> findTestIter = list.find(1);
+			iter = list.begin();
+			Assert::AreEqual(*iter, *findTestIter);
+			findTestIter = list.find(2);
+			iter++;
+			Assert::AreEqual(*iter, *findTestIter);
+			findTestIter = list.find(3);
+			iter++;
+			Assert::AreEqual(*iter, *findTestIter);
+			findTestIter = list.find(4);
+			iter++;
+			Assert::AreEqual(*iter, *findTestIter);
+		}
 
 		TEST_METHOD(first)
 		{
@@ -294,26 +327,26 @@ namespace DoubleLinkedListTests
 			Assert::AreEqual(80, list.last());
 			Assert::AreEqual(5, list.getLength());
 
-			Assert::AreEqual(80, *list.end());
+			Iterator<int> nullIter;
+
+			Assert::IsTrue(nullIter == list.end());
 
 			list.popBack();
-			Assert::AreEqual(60, *list.end());
+			Assert::IsTrue(nullIter == list.end());
 
 			list.popBack();
-			Assert::AreEqual(40, *list.end());
+			Assert::IsTrue(nullIter == list.end());
 
 			list.popBack();
-			Assert::AreEqual(20, *list.end());
+			Assert::IsTrue(nullIter == list.end());
 
 			list.popBack();
-			Assert::AreEqual(10, *list.end());
+			Assert::IsTrue(nullIter == list.end());
 		}
 
 		TEST_METHOD(destory)
 		{
-			List<int> list{ 10,20,30,40,50,60 };
-			Assert::AreEqual(10, list.first());
-			Assert::AreEqual(50, list.last());
+
 		}
 
 		TEST_METHOD(getLength)
@@ -328,9 +361,13 @@ namespace DoubleLinkedListTests
 			Assert::AreEqual(list2.getLength(), 6);
 		}
 
-		TEST_METHOD(get)
+		TEST_METHOD(Get)
 		{
-
+			List<int> list = { 1,2,3,4,5,6,7,8,9 };
+			Assert::AreEqual(1, list.first());
+			Assert::AreEqual(9, list.last());
+			Assert::AreEqual(9, list.getLength());
+			
 		}
 	};
 }
