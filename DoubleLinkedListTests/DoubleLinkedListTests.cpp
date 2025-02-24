@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "List.h"
 #include "ObjectPool.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -367,7 +366,31 @@ namespace DoubleLinkedListTests
 			Assert::AreEqual(1, list.first());
 			Assert::AreEqual(9, list.last());
 			Assert::AreEqual(9, list.getLength());
+		}
+
+		TEST_METHOD(Release)
+		{
+
+		}
+
+		TEST_METHOD(Clear)
+		{
+
+		}
+
+		TEST_METHOD(GetInactiveCount)
+		{
 			
+		}
+
+		TEST_METHOD(GetActiveCount)
+		{
+
+		}
+
+		TEST_METHOD(GetTotalCount)
+		{
+
 		}
 	};
 }
