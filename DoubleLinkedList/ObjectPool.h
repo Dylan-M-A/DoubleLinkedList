@@ -73,7 +73,7 @@ inline void ObjectPool<T>::Release(T& item)
 	//add value to inactive list
 	m_InactiveList.pushBack(item);
 	//return true or if item null return false
-	if (item != null)
+	if (item != NULL)
 	{
 		return true;
 	}
@@ -103,7 +103,7 @@ template<typename T>
 inline int ObjectPool<T>::GetActiveCount()
 {
 	//returns the length of active list
-	return m_ActiveList.getLength
+	return m_ActiveList.getLength;
 }
 
 template<typename T>

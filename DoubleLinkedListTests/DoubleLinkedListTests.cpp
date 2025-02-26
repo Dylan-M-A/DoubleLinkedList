@@ -304,21 +304,19 @@ namespace DoubleLinkedListTests
 			Assert::AreEqual(80, list.last());
 			Assert::AreEqual(5, list.getLength());
 
-			Iterator<int> nullIter;
+			Assert::AreEqual(10, *list.begin());
 
-			Assert::IsTrue(nullIter == list.begin());
+			list.popFront();
+			Assert::AreEqual(20, *list.begin());
 
-			list.popBack();
-			Assert::IsTrue(nullIter == list.begin());
+			list.popFront();
+			Assert::AreEqual(40, *list.begin());
 
-			list.popBack();
-			Assert::IsTrue(nullIter == list.begin());
-
-			list.popBack();
-			Assert::IsTrue(nullIter == list.begin());
-
-			list.popBack();
-			Assert::IsTrue(nullIter == list.begin());
+			list.popFront();
+			Assert::AreEqual(60, *list.begin()); 
+			
+			list.popFront();
+			Assert::AreEqual(80, *list.begin());
 		}
 
 		TEST_METHOD(end)
