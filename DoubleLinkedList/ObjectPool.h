@@ -60,7 +60,7 @@ template<typename T>
 inline void ObjectPool<T>::Release(T& item)
 {
 	//find item in active list
-	T item = m_ActiveList.find(item);
+	m_ActiveList.find(item);
 	//if found we need to remove from active list
 	if (!item)
 	{
@@ -71,7 +71,7 @@ inline void ObjectPool<T>::Release(T& item)
 		m_ActiveList.remove(item);
 	}
 	//add value to inactive list
-	m_InactiveList.pushFront(item);
+	m_InactiveList.pushBack(item);
 	//return true or if item null return false
 	if (item != null)
 	{
@@ -88,8 +88,8 @@ inline void ObjectPool<T>::Clear()
 {
 	//takes an item from the front of either active or inactive lists
 	T item = m_ActiveList.popFront() | m_InactiveList.popFront();
-	m_ActiveList.remove(item);
-	m_InactiveList.remove(item);
+	m_ActiveList.destroy(item);
+	m_InactiveList.destroy(item);
 }
 
 template<typename T>
