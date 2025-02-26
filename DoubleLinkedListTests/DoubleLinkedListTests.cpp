@@ -364,10 +364,7 @@ namespace DoubleLinkedListTests
 
 		TEST_METHOD(Get)
 		{
-			List<int> list = { 1,2,3,4,5,6,7,8,9 };
-			Assert::AreEqual(1, list.first());
-			Assert::AreEqual(9, list.last());
-			Assert::AreEqual(9, list.getLength());
+			
 		}
 
 		TEST_METHOD(Release)

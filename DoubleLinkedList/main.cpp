@@ -1,12 +1,9 @@
 #include <iostream>
-#include "List.h"
+#include "ObjectPool.h"
+
+class Test {};
 
 int main()
 {
-    List<int> list;
-    list.pushBack(1);
-    list.pushBack(2);
-    list.pushFront(10);
-    list.popBack();
-    return 0;
+	ObjectPool<Test*> testPool = ObjectPool<Test*>(100, []() { return new Test(); });
 }
